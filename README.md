@@ -1,71 +1,91 @@
-# terminal-fx README
+# Terminal FX 💣
 
-This is the README for your extension "terminal-fx". After writing up a brief description, we recommend including the following sections.
+> Dramatic sound effects for your terminal — because silent failures are boring.
 
-## Features
-
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
-
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
+Terminal FX plays satisfying audio feedback when you run commands in VS Code. Hear a sound when your server spins up, your build succeeds, or your code explodes in real time. Works with every major language and framework.
 
 ---
 
-## Following extension guidelines
+## Features
 
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
+- 💣 **Start sound** — plays when a monitored command begins
+- ✅ **Success sound** — plays when a command exits cleanly or your server comes online
+- 💥 **Fail sound** — plays when your code crashes or exits with an error
+- 🧪 **Automatic test detection** — Jest, Pytest, Vitest, RSpec and more are detected automatically
+- 🔁 **Crash & restart tracking** — detects mid-session server crashes (nodemon, vite HMR, etc.) and plays the fail sound, then success again when it recovers
+- ⚙️ **Custom settings UI** — add and remove commands without touching `settings.json`
 
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
+---
 
-## Working with Markdown
+## Getting Started
 
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
+Install the extension, then open the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`) and run:
 
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
+```
+TerminalFX: Open Settings
+```
 
-## For more information
+From there you can add commands to monitor and toggle which events play sounds.
 
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+---
 
-**Enjoy!**
+## How It Works
+
+| Event | When it fires |
+|-------|--------------|
+| 💣 Start | A monitored command is run in the terminal |
+| ✅ Success | Command exits with code `0`, or server output matches a ready signal |
+| 💥 Fail | Command exits with non-zero code, or crash detected in stream output |
+
+**Long-running processes** (like `npm run dev` or `python manage.py runserver`) are handled via output stream watching — Terminal FX listens for signals like `"ready"`, `"listening"`, `"compiled successfully"` to know the server is up, and watches for errors like `"app crashed"` or `"SyntaxError"` to trigger the fail sound.
+
+**Short processes** (builds, scripts, tests) rely on exit code — clean and reliable.
+
+---
+
+## Extension Settings
+
+Open `TerminalFX: Open Settings` from the Command Palette for a visual UI, or edit your `settings.json` directly:
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `terminalfx.commands` | `["node", "python", "npm run", ...]` | Commands to monitor in the terminal |
+| `terminalfx.testCommands` | `["jest", "pytest", "vitest", ...]` | Test runners — detected via exit code |
+| `terminalfx.triggerEvents` | `["start", "success", "fail"]` | Which events play a sound |
+
+### Default Monitored Commands
+`node` `nodemon` `python` `python3` `gcc` `npm run` `npm start` `yarn` `pnpm` `cargo run` `go run` `mvn` `gradle`
+
+### Default Test Commands (auto-detected)
+`jest` `vitest` `pytest` `go test` `cargo test` `npm test` `yarn test` `pnpm test` `dotnet test` `phpunit` `rspec` `mocha`
+
+---
+
+## Requirements
+
+- VS Code `^1.93.0` (required for shell execution API)
+- Shell integration enabled (VS Code enables this by default for bash, zsh, fish, and PowerShell)
+
+---
+
+## Known Issues
+
+- Shell integration must be active for command detection to work. If sounds aren't triggering, check that your terminal has shell integration enabled (`Terminal > Integrated > Shell Integration: Enabled` in settings).
+- On Linux, `aplay` must be available for audio playback (`sudo apt install alsa-utils`).
+- Broad crash signals like `"error:"` may occasionally false-positive on verbose output. You can tune the signals via settings if needed.
+
+---
+
+## Release Notes
+
+### 0.0.1
+Initial release — command detection, sound playback, server crash/restart tracking, settings UI.
+
+---
+
+## Contributing
+
+Found a bug or want to add support for a new framework? PRs and issues are welcome at [github.com/durlavdeo/TerminalFX](https://github.com/durlavdeo/TerminalFX).
+
+---
+Made with 💥 by [durlavdeo](https://github.com/durlavdeo)

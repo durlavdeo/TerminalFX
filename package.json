@@ -2,6 +2,16 @@
   "publisher": "durlavdeo",
   "name": "terminal-fx",
   "displayName": "Terminal FX",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/durlavdeo/TerminalFX"
+  },
+  "homepage": "https://github.com/durlavdeo/TerminalFX",
+  "bugs": {
+    "url": "https://github.com/durlavdeo/TerminalFX/issues"
+  },
+   "icon": "media/icon.jpg",
+  "license": "MIT",
   "description": "Plays dramatic sound effects when your terminal commands run, succeed, or explode. Because silent failures are boring.",
    "keywords": ["terminal", "sound", "audio", "productivity", "fun"],
   "version": "0.0.1",

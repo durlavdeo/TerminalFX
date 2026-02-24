@@ -1,0 +1,111 @@
+{
+  "publisher": "durlavdeo",
+  "name": "terminal-fx",
+  "displayName": "Terminal FX",
+  "description": "Plays dramatic sound effects when your terminal commands run, succeed, or explode. Because silent failures are boring.",
+   "keywords": ["terminal", "sound", "audio", "productivity", "fun"],
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.109.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "terminalfx.openSettings",
+        "title": "TerminalFX: Open Settings"
+      }
+    ],
+    "configuration": {
+      "title": "Terminal FX",
+      "properties": {
+        "terminalfx.triggerEvents": {
+          "type": "array",
+          "default": [
+            "start",
+            "success",
+            "fail"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "terminalfx.commands": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "markdownDescription": "List of terminal commands to monitor. Any command that **starts with** one of these strings will trigger sounds. Example: `npm run`, `python`, `node`",
+          "default": [
+            "node",
+            "nodemon",
+            "python",
+            "python3",
+            "gcc",
+            "npm run",
+            "npm start",
+            "yarn",
+            "pnpm",
+            "cargo run",
+            "go run",
+            "mvn",
+            "gradle"
+          ]
+        },
+        "terminalfx.testCommands": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "jest",
+            "vitest",
+            "pytest",
+            "go test",
+            "cargo test",
+            "npm test",
+            "yarn test",
+            "pnpm test",
+            "dotnet test",
+            "phpunit",
+            "rspec",
+            "mocha"
+          ],
+          "description": "Test commands to monitor. Exit code determines success or failure."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && npm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "npm run check-types && npm run lint && node esbuild.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^22.19.11",
+    "@types/vscode": "^1.109.0",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2",
+    "esbuild": "^0.27.2",
+    "eslint": "^9.39.2",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.54.0"
+  }
+}

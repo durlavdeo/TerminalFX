@@ -53,6 +53,8 @@ Open `TerminalFX: Open Settings` from the Command Palette for a visual UI, or ed
 | `terminalfx.testCommands` | `["jest", "pytest", "vitest", ...]` | Test runners — detected via exit code |
 | `terminalfx.triggerEvents` | `["start", "success", "fail"]` | Which events play a sound |
 
+![Settings UI](media/settings.png)
+
 ### Default Monitored Commands
 `node` `nodemon` `python` `python3` `gcc` `npm run` `npm start` `yarn` `pnpm` `cargo run` `go run` `mvn` `gradle`
 

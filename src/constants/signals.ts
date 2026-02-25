@@ -68,6 +68,8 @@ export const crashSignals = [
   "npm err!",
   "npm error",
   "yarn error",
+  "internal server error",
+  "pre-transform error",
 
   // Python
   "traceback (most recent call last)",

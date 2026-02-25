@@ -10,7 +10,7 @@ export const successSignals = [
   "build succeeded",
   "started server on",
   "webpack compiled",
-  "hmr ready",
+  "hmr update",
 
   // Python
   "running on http",

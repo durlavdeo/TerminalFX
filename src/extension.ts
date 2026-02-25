@@ -33,23 +33,29 @@ export function activate(context: vscode.ExtensionContext) {
 
       if (isTestCommand) return;
 
-      let serverRunning = false;
       let crashPlayed = false;
+      let serverStarted = false;
 
       for await (const data of stream) {
         const lower = data.toLowerCase();
 
-        if (successSignals.some((s) => lower.includes(s))) {
+        if (!serverStarted && successSignals.some((s) => lower.includes(s))) {
           playSound("success");
-          serverRunning = true;
+          serverStarted = true;
           crashPlayed = false;
           successfulExecutions.add(event.execution);
         }
-
-        if (!crashPlayed && crashSignals.some((s) => lower.includes(s))) {
+        if (
+          serverStarted &&
+          !crashPlayed &&
+          crashSignals.some((s) => lower.includes(s))
+        ) {
           playSound("fail");
           crashPlayed = true;
-          serverRunning = false;
+        }
+
+        if (crashPlayed && successSignals.some((s) => lower.includes(s))) {
+          crashPlayed = false;
         }
       }
     }),

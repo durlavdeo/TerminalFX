@@ -14,7 +14,7 @@
   "license": "MIT",
   "description": "Plays dramatic sound effects when your terminal commands run, succeed, or explode. Because silent failures are boring.",
    "keywords": ["terminal", "sound", "audio", "productivity", "fun"],
-  "version": "0.0.2",
+  "version": "0.0.3",
   "engines": {
     "vscode": "^1.109.0"
   },

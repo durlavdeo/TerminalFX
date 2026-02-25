@@ -74,7 +74,7 @@ Open `TerminalFX: Open Settings` from the Command Palette for a visual UI, or ed
 
 - Shell integration must be active for command detection to work. If sounds aren't triggering, check that your terminal has shell integration enabled (`Terminal > Integrated > Shell Integration: Enabled` in settings).
 - On Linux, `aplay` must be available for audio playback (`sudo apt install alsa-utils`).
-- Broad crash signals like `"error:"` may occasionally false-positive on verbose output. You can tune the signals via settings if needed.
+- Broad crash signals like `"error:"` may occasionally false-positive on verbose output.
 
 ---
 

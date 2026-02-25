@@ -12,7 +12,7 @@
       href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="icon" href="./icon.jpg">
+    <link rel="icon" href="./icon.jpg" />
     <style>
       *,
       *::before,
@@ -48,7 +48,12 @@
         cursor: none;
       }
 
-      /* Custom cursor */
+      @media (max-width: 768px) {
+        body {
+          cursor: auto;
+        }
+      }
+
       .cursor {
         width: 10px;
         height: 10px;
@@ -72,7 +77,13 @@
         transition: all 0.08s ease;
       }
 
-      /* Grid background */
+      @media (max-width: 768px) {
+        .cursor,
+        .cursor-ring {
+          display: none;
+        }
+      }
+
       body::before {
         content: "";
         position: fixed;
@@ -85,7 +96,6 @@
         z-index: 0;
       }
 
-      /* Glow orbs */
       .orb {
         position: fixed;
         border-radius: 50%;
@@ -94,7 +104,6 @@
         z-index: 0;
         opacity: 0.15;
       }
-
       .orb-1 {
         width: 600px;
         height: 600px;
@@ -103,7 +112,6 @@
         left: -100px;
         animation: orbFloat 8s ease-in-out infinite;
       }
-
       .orb-2 {
         width: 400px;
         height: 400px;
@@ -112,7 +120,6 @@
         right: -100px;
         animation: orbFloat 10s ease-in-out infinite reverse;
       }
-
       @keyframes orbFloat {
         0%,
         100% {
@@ -123,24 +130,23 @@
         }
       }
 
-      /* Nav */
+      /* NAV */
       nav {
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
         z-index: 100;
-        padding: 20px 48px;
+        padding: 16px 48px;
         display: flex;
         align-items: center;
         justify-content: space-between;
         border-bottom: 1px solid transparent;
         transition: all 0.3s;
-        backdrop-filter: blur(0px);
       }
 
       nav.scrolled {
-        background: rgba(13, 13, 15, 0.8);
+        background: rgba(13, 13, 15, 0.9);
         border-bottom-color: var(--border);
         backdrop-filter: blur(20px);
       }
@@ -154,8 +160,8 @@
         display: flex;
         align-items: center;
         gap: 8px;
+        z-index: 101;
       }
-
       .nav-logo span {
         color: var(--accent);
       }
@@ -165,7 +171,6 @@
         align-items: center;
         gap: 32px;
       }
-
       .nav-links a {
         font-family: var(--font-mono);
         font-size: 12px;
@@ -174,31 +179,94 @@
         letter-spacing: 0.05em;
         transition: color 0.2s;
       }
-
       .nav-links a:hover {
         color: var(--text);
       }
-
       .nav-cta {
         background: var(--accent) !important;
         color: #fff !important;
         padding: 8px 18px;
         border-radius: 6px;
         font-weight: 700 !important;
-        transition: opacity 0.2s !important;
       }
-
       .nav-cta:hover {
         opacity: 0.85;
       }
 
-      /* Sections */
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        z-index: 101;
+        padding: 4px;
+      }
+      .hamburger span {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background: var(--text);
+        border-radius: 2px;
+        transition: all 0.3s;
+      }
+      .hamburger.open span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+      .hamburger.open span:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger.open span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+
+      .mobile-menu {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(13, 13, 15, 0.97);
+        z-index: 100;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+      }
+      .mobile-menu.open {
+        display: flex;
+      }
+      .mobile-menu a {
+        font-family: var(--font-mono);
+        font-size: 20px;
+        color: var(--text);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .mobile-menu a:hover {
+        color: var(--accent);
+      }
+      .mobile-menu .nav-cta {
+        font-size: 16px !important;
+        padding: 12px 28px !important;
+        border-radius: 8px;
+      }
+
+      @media (max-width: 768px) {
+        nav {
+          padding: 16px 24px;
+        }
+        .nav-links {
+          display: none;
+        }
+        .hamburger {
+          display: flex;
+        }
+      }
+
       section {
         position: relative;
         z-index: 1;
       }
 
-      /* Hero */
+      /* HERO */
       .hero {
         min-height: 100vh;
         display: flex;
@@ -206,6 +274,16 @@
         padding: 120px 48px 80px;
         max-width: 1200px;
         margin: 0 auto;
+        position: relative;
+      }
+
+      @media (max-width: 768px) {
+        .hero {
+          padding: 100px 24px 60px;
+          flex-direction: column;
+          align-items: flex-start;
+          min-height: auto;
+        }
       }
 
       .hero-content {
@@ -224,7 +302,7 @@
       }
 
       .hero-title {
-        font-size: clamp(52px, 8vw, 96px);
+        font-size: clamp(40px, 8vw, 96px);
         font-weight: 800;
         line-height: 0.95;
         letter-spacing: -0.04em;
@@ -232,7 +310,6 @@
         opacity: 0;
         animation: fadeUp 0.6s ease 0.35s forwards;
       }
-
       .hero-title .accent {
         color: var(--accent);
       }
@@ -249,6 +326,12 @@
         margin-bottom: 40px;
         opacity: 0;
         animation: fadeUp 0.6s ease 0.5s forwards;
+      }
+
+      @media (max-width: 768px) {
+        .hero-sub {
+          font-size: 12px;
+        }
       }
 
       .hero-actions {
@@ -275,7 +358,6 @@
         align-items: center;
         gap: 8px;
       }
-
       .btn-primary:hover {
         opacity: 0.85;
         transform: translateY(-1px);
@@ -296,15 +378,27 @@
         align-items: center;
         gap: 8px;
       }
-
       .btn-secondary:hover {
         border-color: var(--accent);
         transform: translateY(-1px);
       }
 
+      @media (max-width: 480px) {
+        .btn-primary,
+        .btn-secondary {
+          padding: 12px 20px;
+          font-size: 12px;
+          width: 100%;
+          justify-content: center;
+        }
+        .hero-actions {
+          flex-direction: column;
+        }
+      }
+
       .hero-terminal {
         position: absolute;
-        right: 48px;
+        right:-160px;
         top: 50%;
         transform: translateY(-50%);
         width: 420px;
@@ -312,7 +406,7 @@
         animation: fadeLeft 0.8s ease 0.8s forwards;
       }
 
-      @media (max-width: 1000px) {
+      @media (max-width: 1580px) {
         .hero-terminal {
           display: none;
         }
@@ -342,7 +436,6 @@
         height: 10px;
         border-radius: 50%;
       }
-
       .dot-red {
         background: #ff5f57;
       }
@@ -352,14 +445,12 @@
       .dot-green {
         background: #28ca41;
       }
-
       .terminal-title {
         font-family: var(--font-mono);
         font-size: 11px;
         color: var(--muted);
         margin-left: 8px;
       }
-
       .terminal-body {
         padding: 20px;
         font-family: var(--font-mono);
@@ -369,9 +460,6 @@
 
       .t-prompt {
         color: var(--success);
-      }
-      .t-cmd {
-        color: var(--text);
       }
       .t-output {
         color: var(--muted);
@@ -390,7 +478,6 @@
       .blink {
         animation: blink 1s step-end infinite;
       }
-
       @keyframes blink {
         0%,
         100% {
@@ -401,7 +488,6 @@
         }
       }
 
-      /* Animated typing effect */
       .type-1 {
         animation: appear 0s ease 1.2s both;
       }
@@ -429,7 +515,6 @@
       .type-9 {
         animation: appear 0s ease 4.9s both;
       }
-
       @keyframes appear {
         from {
           opacity: 0;
@@ -439,11 +524,16 @@
         }
       }
 
-      /* Features */
+      /* FEATURES */
       .features {
         padding: 100px 48px;
         max-width: 1200px;
         margin: 0 auto;
+      }
+      @media (max-width: 768px) {
+        .features {
+          padding: 60px 24px;
+        }
       }
 
       .section-label {
@@ -454,12 +544,16 @@
         text-transform: uppercase;
         margin-bottom: 12px;
       }
-
       .section-title {
-        font-size: clamp(32px, 4vw, 48px);
+        font-size: clamp(28px, 4vw, 48px);
         font-weight: 800;
         letter-spacing: -0.03em;
         margin-bottom: 60px;
+      }
+      @media (max-width: 768px) {
+        .section-title {
+          margin-bottom: 32px;
+        }
       }
 
       .features-grid {
@@ -467,8 +561,12 @@
         grid-template-columns: repeat(3, 1fr);
         gap: 20px;
       }
-
-      @media (max-width: 768px) {
+      @media (max-width: 900px) {
+        .features-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 560px) {
         .features-grid {
           grid-template-columns: 1fr;
         }
@@ -483,7 +581,6 @@
         position: relative;
         overflow: hidden;
       }
-
       .feature-card::before {
         content: "";
         position: absolute;
@@ -491,7 +588,6 @@
         opacity: 0;
         transition: opacity 0.3s;
       }
-
       .feature-card:nth-child(1)::before {
         background: radial-gradient(
           circle at top left,
@@ -534,16 +630,13 @@
           transparent 60%
         );
       }
-
       .feature-card:hover {
         border-color: rgba(255, 77, 109, 0.3);
         transform: translateY(-4px);
       }
-
       .feature-card:hover::before {
         opacity: 1;
       }
-
       .feature-icon {
         font-size: 32px;
         margin-bottom: 16px;
@@ -551,7 +644,6 @@
         position: relative;
         z-index: 1;
       }
-
       .feature-name {
         font-size: 17px;
         font-weight: 700;
@@ -560,7 +652,6 @@
         position: relative;
         z-index: 1;
       }
-
       .feature-desc {
         font-family: var(--font-mono);
         font-size: 12px;
@@ -570,14 +661,18 @@
         z-index: 1;
       }
 
-      /* How it works */
+      /* HOW IT WORKS */
       .how {
         padding: 100px 48px;
         background: var(--surface);
         border-top: 1px solid var(--border);
         border-bottom: 1px solid var(--border);
       }
-
+      @media (max-width: 768px) {
+        .how {
+          padding: 60px 24px;
+        }
+      }
       .how-inner {
         max-width: 1200px;
         margin: 0 auto;
@@ -590,7 +685,6 @@
         margin-top: 60px;
         position: relative;
       }
-
       .flow::before {
         content: "";
         position: absolute;
@@ -610,9 +704,18 @@
       @media (max-width: 768px) {
         .flow {
           grid-template-columns: 1fr;
+          gap: 32px;
+          margin-top: 40px;
         }
         .flow::before {
           display: none;
+        }
+        .flow-step {
+          display: flex;
+          gap: 20px;
+          align-items: flex-start;
+          padding: 0;
+          text-align: left;
         }
       }
 
@@ -620,7 +723,6 @@
         padding: 0 24px;
         text-align: center;
       }
-
       .flow-num {
         width: 64px;
         height: 64px;
@@ -632,8 +734,13 @@
         margin: 0 auto 20px;
         position: relative;
         z-index: 1;
+        flex-shrink: 0;
       }
-
+      @media (max-width: 768px) {
+        .flow-num {
+          margin: 0;
+        }
+      }
       .flow-step:nth-child(1) .flow-num {
         background: rgba(255, 77, 109, 0.15);
         border: 1px solid rgba(255, 77, 109, 0.3);
@@ -646,13 +753,11 @@
         background: rgba(57, 217, 138, 0.15);
         border: 1px solid rgba(57, 217, 138, 0.3);
       }
-
       .flow-title {
         font-size: 16px;
         font-weight: 700;
         margin-bottom: 8px;
       }
-
       .flow-desc {
         font-family: var(--font-mono);
         font-size: 12px;
@@ -660,11 +765,16 @@
         line-height: 1.8;
       }
 
-      /* Install */
+      /* INSTALL */
       .install {
         padding: 100px 48px;
         max-width: 1200px;
         margin: 0 auto;
+      }
+      @media (max-width: 768px) {
+        .install {
+          padding: 60px 24px;
+        }
       }
 
       .install-box {
@@ -674,6 +784,11 @@
         padding: 32px;
         margin-top: 40px;
       }
+      @media (max-width: 768px) {
+        .install-box {
+          padding: 20px;
+        }
+      }
 
       .install-step {
         display: flex;
@@ -682,9 +797,14 @@
         padding: 20px 0;
         border-bottom: 1px solid var(--border);
       }
-
       .install-step:last-child {
         border-bottom: none;
+      }
+      @media (max-width: 560px) {
+        .install-step {
+          flex-direction: column;
+          gap: 12px;
+        }
       }
 
       .install-num {
@@ -701,8 +821,8 @@
 
       .install-content {
         flex: 1;
+        min-width: 0;
       }
-
       .install-title {
         font-size: 15px;
         font-weight: 600;
@@ -722,6 +842,19 @@
         justify-content: space-between;
         gap: 12px;
         margin-top: 8px;
+        overflow: hidden;
+      }
+      .code-block span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        min-width: 0;
+      }
+      @media (max-width: 560px) {
+        .code-block {
+          font-size: 11px;
+          padding: 10px 12px;
+        }
       }
 
       .copy-btn {
@@ -735,32 +868,34 @@
         padding: 4px 10px;
         transition: all 0.2s;
         white-space: nowrap;
+        flex-shrink: 0;
       }
-
       .copy-btn:hover {
         border-color: var(--accent);
         color: var(--accent);
       }
 
-      /* Supported */
+      /* SUPPORTED */
       .supported {
         padding: 100px 48px;
         background: var(--surface);
         border-top: 1px solid var(--border);
       }
-
+      @media (max-width: 768px) {
+        .supported {
+          padding: 60px 24px;
+        }
+      }
       .supported-inner {
         max-width: 1200px;
         margin: 0 auto;
       }
-
       .lang-grid {
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
         margin-top: 40px;
       }
-
       .lang-tag {
         background: var(--surface2);
         border: 1px solid var(--border);
@@ -771,14 +906,13 @@
         color: var(--text);
         transition: all 0.2s;
       }
-
       .lang-tag:hover {
         border-color: var(--accent);
         color: var(--accent);
         transform: translateY(-2px);
       }
 
-      /* Footer */
+      /* FOOTER */
       footer {
         padding: 48px;
         border-top: 1px solid var(--border);
@@ -788,23 +922,28 @@
         flex-wrap: wrap;
         gap: 20px;
       }
-
+      @media (max-width: 768px) {
+        footer {
+          padding: 32px 24px;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 16px;
+        }
+      }
       .footer-logo {
         font-family: var(--font-mono);
         font-size: 14px;
         font-weight: 700;
         color: var(--text);
       }
-
       .footer-logo span {
         color: var(--accent);
       }
-
       .footer-links {
         display: flex;
         gap: 24px;
+        flex-wrap: wrap;
       }
-
       .footer-links a {
         font-family: var(--font-mono);
         font-size: 12px;
@@ -812,18 +951,16 @@
         text-decoration: none;
         transition: color 0.2s;
       }
-
       .footer-links a:hover {
         color: var(--text);
       }
-
       .footer-copy {
         font-family: var(--font-mono);
         font-size: 11px;
         color: var(--muted);
       }
 
-      /* Animations */
+      /* ANIMATIONS */
       @keyframes fadeUp {
         from {
           opacity: 0;
@@ -834,7 +971,6 @@
           transform: translateY(0);
         }
       }
-
       @keyframes fadeLeft {
         from {
           opacity: 0;
@@ -845,19 +981,16 @@
           transform: translate(0, -50%);
         }
       }
-
       .reveal {
         opacity: 0;
         transform: translateY(30px);
         transition: all 0.6s ease;
       }
-
       .reveal.visible {
         opacity: 1;
         transform: translateY(0);
       }
 
-      /* Scrollbar */
       ::-webkit-scrollbar {
         width: 4px;
       }
@@ -890,13 +1023,38 @@
           >GitHub</a
         >
         <a
-          href="https://github.com/durlavdeo/TerminalFX/releases"
+          href="https://github.com/durlavdeo/TerminalFX/releases/latest"
           target="_blank"
           class="nav-cta"
+          id="nav-cta"
           >Download</a
         >
       </div>
+      <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </div>
     </nav>
+
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#features" onclick="toggleMenu()">Features</a>
+      <a href="#install" onclick="toggleMenu()">Install</a>
+      <a href="#supported" onclick="toggleMenu()">Languages</a>
+      <a
+        href="https://github.com/durlavdeo/TerminalFX"
+        target="_blank"
+        onclick="toggleMenu()"
+        >GitHub</a
+      >
+      <a
+        href="https://github.com/durlavdeo/TerminalFX/releases/latest"
+        target="_blank"
+        class="nav-cta"
+        id="nav-cta-mobile"
+        onclick="toggleMenu()"
+        >↓ Download</a
+      >
+    </div>
 
     <!-- Hero -->
     <section>
@@ -915,23 +1073,20 @@
           </p>
           <div class="hero-actions">
             <a
-              href="https://github.com/durlavdeo/TerminalFX/releases"
-              target="_blank"
+              id="download-btn"
+              href="https://github.com/durlavdeo/TerminalFX/releases/latest"
               class="btn-primary"
             >
-              ↓ Download .vsix
+              ↓ Download <span class="release-version">latest</span>
             </a>
             <a
               href="https://github.com/durlavdeo/TerminalFX"
               target="_blank"
               class="btn-secondary"
+              >★ GitHub</a
             >
-              ★ GitHub
-            </a>
           </div>
         </div>
-
-        <!-- Terminal mockup -->
         <div class="hero-terminal">
           <div class="terminal-window">
             <div class="terminal-header">
@@ -943,7 +1098,7 @@
             <div class="terminal-body">
               <div class="type-1">
                 <span class="t-prompt">~/project $</span>
-                <span class="t-cmd">npm run dev</span>
+                <span>npm run dev</span>
               </div>
               <div class="type-2">
                 <span class="t-sound">🔊 planted.wav</span>
@@ -1042,26 +1197,32 @@
         <div class="flow reveal">
           <div class="flow-step">
             <div class="flow-num">💣</div>
-            <div class="flow-title">Command Runs</div>
-            <div class="flow-desc">
-              You run a command. Terminal FX detects it instantly via VS Code's
-              shell execution API and plays the start sound.
+            <div>
+              <div class="flow-title">Command Runs</div>
+              <div class="flow-desc">
+                You run a command. Terminal FX detects it instantly via VS
+                Code's shell execution API and plays the start sound.
+              </div>
             </div>
           </div>
           <div class="flow-step">
             <div class="flow-num">👂</div>
-            <div class="flow-title">Output Watched</div>
-            <div class="flow-desc">
-              For long-running processes, the output stream is monitored for
-              server ready signals and crash indicators in real time.
+            <div>
+              <div class="flow-title">Output Watched</div>
+              <div class="flow-desc">
+                For long-running processes, the output stream is monitored for
+                server ready signals and crash indicators in real time.
+              </div>
             </div>
           </div>
           <div class="flow-step">
             <div class="flow-num">🔊</div>
-            <div class="flow-title">Sound Plays</div>
-            <div class="flow-desc">
-              Success or fail — the right sound fires at the right moment. Exit
-              codes handle scripts and tests reliably.
+            <div>
+              <div class="flow-title">Sound Plays</div>
+              <div class="flow-desc">
+                Success or fail — the right sound fires at the right moment.
+                Exit codes handle scripts and tests reliably.
+              </div>
             </div>
           </div>
         </div>
@@ -1080,12 +1241,14 @@
           <div class="install-content">
             <div class="install-title">Download the .vsix file</div>
             <div class="code-block">
-              <span>github.com/durlavdeo/TerminalFX/releases</span>
+              <span id="download-link"
+                >github.com/durlavdeo/TerminalFX/releases/latest</span
+              >
               <button
                 class="copy-btn"
                 onclick="
                   copyText(
-                    'https://github.com/durlavdeo/TerminalFX/releases',
+                    document.getElementById('download-link').textContent,
                     this,
                   )
                 "
@@ -1098,14 +1261,18 @@
         <div class="install-step">
           <span class="install-num">02</span>
           <div class="install-content">
-            <div class="install-title">Install via terminal</div>
+            <div class="install-title">
+              Navigate to the folder where you downloaded the file, then run:
+            </div>
             <div class="code-block">
-              <span>code --install-extension terminal-fx-0.0.1.vsix</span>
+              <span id="install-cmd"
+                >code --install-extension terminal-fx-0.0.3.vsix</span
+              >
               <button
                 class="copy-btn"
                 onclick="
                   copyText(
-                    'code --install-extension terminal-fx-0.0.1.vsix',
+                    document.getElementById('install-cmd').textContent,
                     this,
                   )
                 "
@@ -1157,39 +1324,33 @@
           <h2 class="section-title">Works with everything.</h2>
         </div>
         <div class="lang-grid reveal">
-          <span class="lang-tag">Node.js</span>
-          <span class="lang-tag">Python</span>
-          <span class="lang-tag">Rust</span>
-          <span class="lang-tag">Go</span>
-          <span class="lang-tag">Java</span>
-          <span class="lang-tag">C/C++</span>
-          <span class="lang-tag">Ruby</span>
-          <span class="lang-tag">PHP</span>
-          <span class="lang-tag">.NET</span>
-          <span class="lang-tag">Kotlin</span>
-          <span class="lang-tag">Swift</span>
-          <span class="lang-tag">Elixir</span>
-          <span class="lang-tag">Django</span>
-          <span class="lang-tag">FastAPI</span>
-          <span class="lang-tag">Flask</span>
-          <span class="lang-tag">Express</span>
-          <span class="lang-tag">NestJS</span>
-          <span class="lang-tag">Vite</span>
-          <span class="lang-tag">Webpack</span>
-          <span class="lang-tag">Next.js</span>
-          <span class="lang-tag">Nuxt</span>
-          <span class="lang-tag">SvelteKit</span>
-          <span class="lang-tag">Spring Boot</span>
-          <span class="lang-tag">Rails</span>
-          <span class="lang-tag">Laravel</span>
-          <span class="lang-tag">Jest</span>
-          <span class="lang-tag">Vitest</span>
-          <span class="lang-tag">Pytest</span>
-          <span class="lang-tag">RSpec</span>
-          <span class="lang-tag">PHPUnit</span>
-          <span class="lang-tag">cargo test</span>
-          <span class="lang-tag">go test</span>
-          <span class="lang-tag">dotnet test</span>
+          <span class="lang-tag">Node.js</span
+          ><span class="lang-tag">Python</span
+          ><span class="lang-tag">Rust</span> <span class="lang-tag">Go</span
+          ><span class="lang-tag">Java</span><span class="lang-tag">C/C++</span>
+          <span class="lang-tag">Ruby</span><span class="lang-tag">PHP</span
+          ><span class="lang-tag">.NET</span>
+          <span class="lang-tag">Kotlin</span><span class="lang-tag">Swift</span
+          ><span class="lang-tag">Elixir</span>
+          <span class="lang-tag">Django</span
+          ><span class="lang-tag">FastAPI</span
+          ><span class="lang-tag">Flask</span>
+          <span class="lang-tag">Express</span
+          ><span class="lang-tag">NestJS</span
+          ><span class="lang-tag">Vite</span>
+          <span class="lang-tag">Webpack</span
+          ><span class="lang-tag">Next.js</span
+          ><span class="lang-tag">Nuxt</span>
+          <span class="lang-tag">SvelteKit</span
+          ><span class="lang-tag">Spring Boot</span
+          ><span class="lang-tag">Rails</span>
+          <span class="lang-tag">Laravel</span><span class="lang-tag">Jest</span
+          ><span class="lang-tag">Vitest</span>
+          <span class="lang-tag">Pytest</span><span class="lang-tag">RSpec</span
+          ><span class="lang-tag">PHPUnit</span>
+          <span class="lang-tag">cargo test</span
+          ><span class="lang-tag">go test</span
+          ><span class="lang-tag">dotnet test</span>
           <span class="lang-tag">Mocha</span>
         </div>
       </div>
@@ -1215,7 +1376,38 @@
     </footer>
 
     <script>
-      // Custom cursor
+      function toggleMenu() {
+        document.getElementById("mobileMenu").classList.toggle("open");
+        document.getElementById("hamburger").classList.toggle("open");
+      }
+
+      async function loadLatestRelease() {
+        try {
+          const res = await fetch(
+            "https://api.github.com/repos/durlavdeo/TerminalFX/releases/latest",
+          );
+          const data = await res.json();
+          const version = data.tag_name;
+          const vsix = data.assets.find((a) => a.name.endsWith(".vsix"));
+          const downloadUrl = vsix?.browser_download_url;
+          const fileName = vsix?.name;
+
+          document
+            .querySelectorAll(".release-version")
+            .forEach((el) => (el.textContent = version));
+          document.getElementById("download-btn").href = downloadUrl;
+          document.getElementById("nav-cta").href = downloadUrl;
+          document.getElementById("nav-cta-mobile").href = downloadUrl;
+          document.getElementById("download-link").textContent = downloadUrl;
+          document.getElementById("install-cmd").textContent =
+            `code --install-extension ${fileName}`;
+        } catch (err) {
+          console.error("Failed to fetch release info:", err);
+        }
+      }
+
+      loadLatestRelease();
+
       const cursor = document.getElementById("cursor");
       const ring = document.getElementById("cursorRing");
       let mx = 0,
@@ -1250,27 +1442,21 @@
         );
       });
 
-      // Nav scroll
       const nav = document.getElementById("nav");
-      window.addEventListener("scroll", () => {
-        nav.classList.toggle("scrolled", window.scrollY > 40);
-      });
+      window.addEventListener("scroll", () =>
+        nav.classList.toggle("scrolled", window.scrollY > 40),
+      );
 
-      // Scroll reveal
-      const reveals = document.querySelectorAll(".reveal");
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((e) => {
-            if (e.isIntersecting) {
-              e.target.classList.add("visible");
-            }
+            if (e.isIntersecting) e.target.classList.add("visible");
           });
         },
         { threshold: 0.15 },
       );
-      reveals.forEach((r) => observer.observe(r));
+      document.querySelectorAll(".reveal").forEach((r) => observer.observe(r));
 
-      // Copy button
       function copyText(text, btn) {
         navigator.clipboard.writeText(text).then(() => {
           const orig = btn.textContent;
